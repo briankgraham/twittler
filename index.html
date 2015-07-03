@@ -17,9 +17,11 @@
           </ul>
         </nav>
       </header>
+      <div id = "border">
         <div id = "innerContainer">
         
         </div>
+      </div>
     </div>
     <script>
 
@@ -33,7 +35,7 @@
                 var tweet = streams.home[index];
                 var $tweet = $('<div class = "posts" data-user = ' +tweet.user + '></div>');
                 
-                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': ' + tweet.message).fadeIn(500);
+                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': ' + tweet.message + '-----------> (Time Created: ' + tweet.created_at.toLocaleString() + ')').fadeIn(500);
                 
                 $tweet.appendTo($container);
                 //($container).fadeIn(700);
@@ -43,8 +45,14 @@
         showTweets();
 
         $(".Tweets").on("click", 'li', showTweets);
-        $(".posts").on('click', function(){
-          alert($(this).data('user'));
+        $("#innerContainer").on('click', '.posts', function(){
+          var $tweets = streams.users[$(this).data('user')];
+          $container.html('');
+          for (var i = 0; i < $tweets.length; i++){
+            var $msg = $('<div class = "posts" data-user' + $tweets[i].user + '></div>');
+            $msg.html('<a href = "#">' + '@' + $tweets[i].user + '</a>' + ': ' + $tweets[i].message).fadeIn(500);
+            $msg.appendTo($container);
+          } 
         });
 
       });
