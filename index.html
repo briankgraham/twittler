@@ -3,22 +3,49 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href ="twittler.css"></script>
   </head>
+  
   <body>
+    
+    <div id = "container">
+      <header>
+        <div id = "logo">TWITTLER.</div>
+        <nav>
+          <ul class = "Tweets">
+            <li><a href = '#'>Show New Tweets</a></li>
+          </ul>
+        </nav>
+      </header>
+        <div id = "innerContainer">
+        
+        </div>
+    </div>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $body      = $('body'),
+            $container = $('#innerContainer'),
+            showTweets = function(){
+              $container.html('');
+              var index = streams.home.length - 1;
+              while(index >= 0){
+                var tweet = streams.home[index];
+                var $tweet = $('<div class = "posts" data-user = ' +tweet.user + '></div>');
+                
+                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': ' + tweet.message).fadeIn(500);
+                
+                $tweet.appendTo($container);
+                //($container).fadeIn(700);
+                index -= 1;
+              }
+            };
+        showTweets();
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        $(".Tweets").on("click", 'li', showTweets);
+        $(".posts").on('click', function(){
+          alert($(this).data('user'));
+        });
 
       });
 
