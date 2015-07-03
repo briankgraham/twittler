@@ -4,6 +4,21 @@
 	text-align: center;
 	border-bottom: 2px solid #3B3131;
 }
+body{
+	font-family: 'HelveticaNeue-Light', sans-serif;
+}
 li{
 	list-style-type: none;
+}
+#innerContainer{
+	border: 2px solid black;
+	padding:1%;
+
+}
+#border{
+	width: 73%;
+
+}
+.posts{
+	padding:.5%;
 }
