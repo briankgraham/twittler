@@ -1,0 +1,9 @@
+#logo{
+	font-family: 'HelveticaNeue-Light', sans-serif;
+	font-size: 40px;
+	text-align: center;
+	border-bottom: 2px solid #3B3131;
+}
+li{
+	list-style-type: none;
+}
