@@ -20,6 +20,14 @@ button{
 	font-weight: bold;
 	font-style: italic;
 }
+button:focus{
+	outline-style: none;	
+}
+.postTweet{
+	margin-left: 10px;
+	margin-top: 7px;
+	width: 280px;
+}
 body{
 	font-family: 'HelveticaNeue-Light', sans-serif;
 	padding-top:2%;
@@ -52,4 +60,8 @@ li{
 }
 .posts{
 	padding:1%;
+}
+#userBox{
+	margin-left: 10px;
+	float:right;
 }
