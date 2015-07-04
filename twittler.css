@@ -1,24 +1,55 @@
 #logo{
 	font-family: 'HelveticaNeue-Light', sans-serif;
 	font-size: 40px;
-	text-align: center;
-	border-bottom: 2px solid #3B3131;
+	padding-left:10px;
+	float:left;
+	
+}
+#select{
+	padding:5px;
+	border-bottom: 1.5px solid black;
+	overflow: auto;
+}
+button{
+	margin-top: 8px;
+	margin-left: 5px;
+	padding: 9px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 1em rgb(82, 81, 77), 0 0 1em rgb(207, 186, 186);
+    background-color: rgb(125, 180, 218);
+	font-weight: bold;
+	font-style: italic;
 }
 body{
 	font-family: 'HelveticaNeue-Light', sans-serif;
+	padding-top:2%;
+	background-image: url("BckGrnd.jpg");
+	background-attachment: fixed;
 }
 li{
 	list-style-type: none;
 }
+#container{
+	width: 100%;
+}
+
+#whosTweets{
+	text-align: center;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
 #innerContainer{
-	border: 2px solid black;
+	margin: 0 auto;
+	border-radius: 25px;
 	padding:1%;
+	background-color: #FFFFFF;
+	width:300px;
 
 }
-#border{
-	width: 73%;
-
+#Tweets{
+	display:inline-block;
+	text-align: center;
 }
 .posts{
-	padding:.5%;
+	padding:1%;
 }
