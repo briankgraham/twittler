@@ -4,59 +4,53 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" href ="twittler.css"></script>
-  </head>
-  
-  <body>
-    
-    <div id = "container">
-      <header>
+  </head> 
+  <body>   
+      <div id = "select">
         <div id = "logo">TWITTLER.</div>
-        <nav>
-          <ul class = "Tweets">
-            <li><a href = '#'>Show New Tweets</a></li>
-          </ul>
-        </nav>
-      </header>
-      <div id = "border">
-        <div id = "innerContainer">
-        
+        <div id = "Tweets">
+        <button class = "one">Show New Tweetles</button>
+        <button class = "two">
+          Post New Tweetle
+        </button>
         </div>
       </div>
+    <div id = "container">
+      <div id = "whosTweets"></div>
+        <div id = "innerContainer">        
+        </div>
     </div>
     <script>
-
       $(document).ready(function(){
         var $body      = $('body'),
             $container = $('#innerContainer'),
             showTweets = function(){
               $container.html('');
+              $('#whosTweets').html('<b>Your Followers\' Tweetles</b>');
               var index = streams.home.length - 1;
               while(index >= 0){
                 var tweet = streams.home[index];
                 var $tweet = $('<div class = "posts" data-user = ' +tweet.user + '></div>');
-                
-                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': ' + tweet.message + '-----------> (Time Created: ' + tweet.created_at.toLocaleString() + ')').fadeIn(500);
-                
+                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': <em>' + tweet.created_at.toLocaleString() + '</em><br> ' + tweet.message).fadeIn(500);
                 $tweet.appendTo($container);
-                //($container).fadeIn(700);
                 index -= 1;
               }
             };
         showTweets();
-
-        $(".Tweets").on("click", 'li', showTweets);
+        $("#Tweets").on("click", 'button', function(){
+          if ($(this).text() == "Show New Tweetles") showTweets(); 
+        });
         $("#innerContainer").on('click', '.posts', function(){
           var $tweets = streams.users[$(this).data('user')];
           $container.html('');
+          $('#whosTweets').html('<b>' + $(this).data('user') + '\'s Tweetles</b>');
           for (var i = 0; i < $tweets.length; i++){
-            var $msg = $('<div class = "posts" data-user' + $tweets[i].user + '></div>');
+            var $msg = $('<div class = "posts" data-user =' + $tweets[i].user + '></div>');
             $msg.html('<a href = "#">' + '@' + $tweets[i].user + '</a>' + ': ' + $tweets[i].message).fadeIn(500);
             $msg.appendTo($container);
           } 
         });
-
       });
-
     </script>
   </body>
 </html>
