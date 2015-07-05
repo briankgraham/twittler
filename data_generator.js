@@ -66,6 +66,6 @@ var writeTweet = function(message){
   tweet.user = visitor;
   tweet.message = message;
   tweet.created_at = new Date();
-  streams.users[tweet.user] = [];
+  streams.users[tweet.user] = streams.users[tweet.user] || [];
   addTweet(tweet);
 };
