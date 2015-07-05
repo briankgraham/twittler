@@ -22,49 +22,84 @@
       $(document).ready(function(){
         var $whosTweets = $('#whosTweets'),
             $container  = $('#innerContainer'),
+            $Tweets     = $("#Tweets"),
+            isPosting   = false,
+            $tweet;
+            
             showTweets  = function(){
-              var index = streams.home.length - 1;
+              var index = streams.home.length - 1,
+                  tweet;
               $container.html('');
-              $whosTweets.html('<b>Your Followers\' Tweetles</b>');
+              $whosTweets.html('Your Followers\' Tweetles');
               while(index >= 0){
-                var tweet = streams.home[index],
-                   $tweet = $('<div class = "posts" data-user = ' +tweet.user + '></div>');
-                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' + ': <em>' + tweet.created_at.toLocaleString() + '</em><br> ' + tweet.message).fadeIn(500);
-                $tweet.appendTo($container);
+                 tweet = streams.home[index],
+                $tweet = $('<div class = "posts" data-user =' +tweet.user + '></div>');
+                $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' 
+                            + ': <em>' + tweet.created_at.toLocaleString() 
+                            + '</em><br> ' + tweet.message)
+                      .fadeIn(600)
+                      .appendTo($container);
                 index -= 1;
               }
             },
-            
-            getUsername = function(){
-              $('#Tweets').append('<div id = "userBox">Enter your name: <input class = "storeUser" type = "text"><button>Submit</button></div>');
+
+            showOthersTweets = function(){
+              var $userName = $(this).parent().data('user'),
+                  $tweets   = streams.users[$userName],
+                  $len      = $tweets.length,
+                  i = 0,
+                  $msg;
+              $container.html('');
+              $whosTweets.html($userName + '\'s Tweetles');
+              $.each($tweets, function(index, value){
+                $msg = $('<div class = "posts" data-user =' + value.user + '></div>');
+                $msg.html('<a href = "#">' + '@' + value.user + '</a>' + ': ' + value.message)
+                    .fadeIn(600)
+                    .appendTo($container);
+              }); 
             },
-            storeUsername = function(){visitor = $(".storeUser").val(); }; 
+
+            storeUsername = function(){
+              visitor = $(".storeUser").val(); 
+            },
+
+            storeTweet = function(){
+              writeTweet($(".postTweet").val());
+              $('#userBox').remove();
+              showTweets();
+              isPosting = false;
+            };
+
         showTweets();
-        $("#Tweets").on("click", 'button', function(){
-          if ($(this).text() == "Show New Tweetles") showTweets(); 
-          if ($(this).text() == "Post New Tweetle") getUsername(); 
-          if ($(this).text() == "Submit"){
-            storeUsername();
-            $('#userBox').remove();
-            $('#Tweets').append('<div id = "userBox"><input class = "postTweet" type = "text" ><button>Post Tweetle</button></div>');
+        $container.on('click', 'a', showOthersTweets);
+        $Tweets.on("click", 'button', function(){
+          var $text = $(this).text();  
+          switch ($text){
+            case "Show New Tweetles":
+              showTweets();
+              break;
+            case "Post New Tweetle":
+              if (!isPosting){
+                typeof visitor === 'undefined' ? $Tweets.append('<div id = "userBox">Enter your name: <input class = "storeUser" type = "text"><button>Submit</button></div>')
+                        : $Tweets
+                            .append('<div id="userBox"><input class="postTweet" type="text"><button>Post Tweetle</button></div>');
+                isPosting = true;
+              }
+              break;
+            case "Submit":
+              storeUsername();
+              if (visitor.length < 3 || visitor[0] === ' '){
+                alert("You must enter a name with at least 3 characters");
+              }else{
+                $('#userBox').remove();
+                $Tweets.append('<div id="userBox"><input class="postTweet" type="text"><button>Post Tweetle</button></div>');
+              }
+              break;
+            case "Post Tweetle":
+              storeTweet();
+              break;
           }
-          if ($(this).text() == "Post Tweetle"){
-            writeTweet($(".postTweet").val());
-            $('#userBox').remove();
-            showTweets();
-          } 
-        });
-        $container.on('click', '.posts', function(){
-          var $userName = $(this).data('user'),
-              $tweets   = streams.users[$userName];
-          $container.html('');
-          $whosTweets.html('<b>' + $userName + '\'s Tweetles</b>');
-          for (var i = 0; i < $tweets.length; i++){
-            var $msg = $('<div class = "posts" data-user =' + $tweets[i].user + '></div>');
-            $msg.html('<a href = "#">' + '@' + $tweets[i].user + '</a>' + ': ' + $tweets[i].message).fadeIn(500);
-            $msg.appendTo($container);
-          } 
-        });
+        });       
       });
     </script>
   </body>
