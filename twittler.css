@@ -55,7 +55,7 @@ li{list-style-type: none;}
 	overflow: auto;
 	background-color: white;
 	border-radius: 25px;
-	border: 2px solid black;
+	border: 2xpx solid black;
 }
 .storeUser{
 	width:100px;
