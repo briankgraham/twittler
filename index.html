@@ -28,11 +28,13 @@
             
             showTweets  = function(){
               var index = streams.home.length - 1,
-                  tweet;
+                  tweet, 
+                  amount = streams.home.length > 20 ? streams.home.length - 20 : 0;
+
               $container.html('');
               $whosTweets.html('Your Followers\' Tweetles');
-              while(index >= 0){
-                 tweet = streams.home[index],
+              while(index >= amount){
+                 tweet = streams.home[index];
                 $tweet = $('<div class = "posts" data-user =' +tweet.user + '></div>');
                 $tweet.html('<a href = "#">' + '@' + tweet.user + '</a>' 
                             + ': <em>' + tweet.created_at.toLocaleString() 
