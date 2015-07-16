@@ -3,6 +3,7 @@ body{
 	padding-top:2%;
 	background-image: url("BckGrnd.jpg");
 	background-attachment: fixed;
+	background-size: cover;
 }
 button{
 	margin-top: 8px;
