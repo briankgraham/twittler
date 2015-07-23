@@ -24,12 +24,12 @@
             $container  = $('#innerContainer'),
             $Tweets     = $("#Tweets"),
             isPosting   = false,
+            dynamicItems,
             $tweet;
             
             showTweets  = function(){
               var index = streams.home.length - 1,
-                  tweet, tweetText,
-                  dynamicItems = "",
+                  tweet, tweetText, dynamicItems = "",
                   amount = streams.home.length > 20 ? streams.home.length - 20 : 0;
 
               $container.html('');
@@ -57,12 +57,12 @@
               $container.text('');
               $whosTweets.text($userName + '\'s Tweetles');
               $.each($tweets, function(index, value){
-                dynamicItems += 
-                $msg = $('<div class = "posts" data-user =' + value.user + '></div>');
-                $msg.html('<a href = "#">' + '@' + value.user + '</a>' + ': ' + value.message)
-                    .fadeIn(600)
-                    .appendTo($container);
+                dynamicItems += '<li class = "posts" data-user =' 
+                                + value.user + '></div>' 
+                                + '<a href = "#">' + '@' + value.user 
+                                + '</a>' + ': ' + value.message + '</li>';
               }); 
+              ($container).hide().append(dynamicItems).fadeIn(600);
             },
 
             storeUsername = function(){
