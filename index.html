@@ -37,14 +37,13 @@
               while(index >= amount){
                  tweet = streams.home[index];
                 //$tweet = $('<li class = "posts" data-user =' +tweet.user + '></li>');
-                dynamicItems += '<li class = "posts" data-user =' + tweet.user 
-                            + '><a href = "#">' + '@' + tweet.user + '</a>' 
+                dynamicItems += '<li class = "posts" data-user =' + tweet.user + '><a href = "#">' 
+                            + '@' + tweet.user + '</a>' 
                             + ': <em>' + tweet.created_at.toLocaleString() 
                             + '</em><br> ' + tweet.message + '</li>';
                 index -= 1;
               }
               ($container).hide().append(dynamicItems).fadeIn(600);
-
             },
 
             showOthersTweets = function(){
@@ -57,10 +56,10 @@
               $container.text('');
               $whosTweets.text($userName + '\'s Tweetles');
               $.each($tweets, function(index, value){
-                dynamicItems += '<li class = "posts" data-user =' 
-                                + value.user + '></div>' 
-                                + '<a href = "#">' + '@' + value.user 
-                                + '</a>' + ': ' + value.message + '</li>';
+                dynamicItems += '<li class = "posts" data-user =' + value.user + '></div>' 
+                                + '<a href = "#">' + '@' + value.user + '</a>' 
+                                + ': <em>' + value.created_at.toLocaleString() + '</em><br> '
+                                + value.message + '</li>';
               }); 
               ($container).hide().append(dynamicItems).fadeIn(600);
             },
