@@ -25,34 +25,30 @@
             $Tweets     = $("#Tweets"),
             isPosting   = false,
             dynamicItems,
-            $tweet;
             
             showTweets  = function(){
               var index = streams.home.length - 1,
-                  tweet, tweetText, dynamicItems = "",
+                  tweet, 
+                  dynamicItems = "",
                   amount = streams.home.length > 20 ? streams.home.length - 20 : 0;
 
-              $container.html('');
-              $whosTweets.html('Your Followers\' Tweetles');
+              $container.text('');
+              $whosTweets.text('All the Tweetles');
               while(index >= amount){
-                 tweet = streams.home[index];
-                //$tweet = $('<li class = "posts" data-user =' +tweet.user + '></li>');
+                tweet = streams.home[index];
                 dynamicItems += '<li class = "posts" data-user =' + tweet.user + '><a href = "#">' 
                             + '@' + tweet.user + '</a>' 
                             + ': <em>' + tweet.created_at.toLocaleString() 
                             + '</em><br> ' + tweet.message + '</li>';
                 index -= 1;
               }
-              ($container).hide().append(dynamicItems).fadeIn(600);
+              $container.hide().append(dynamicItems).fadeIn(600);
             },
 
             showOthersTweets = function(){
               var $userName = $(this).parent().data('user'),
                   $tweets   = streams.users[$userName],
-                  $len      = $tweets.length,
-                  i = 0,
-                  dynamicItems = "",
-                  $msg;
+                  dynamicItems = "";
               $container.text('');
               $whosTweets.text($userName + '\'s Tweetles');
               $.each($tweets, function(index, value){
@@ -61,7 +57,7 @@
                                 + ': <em>' + value.created_at.toLocaleString() + '</em><br> '
                                 + value.message + '</li>';
               }); 
-              ($container).hide().append(dynamicItems).fadeIn(600);
+              $container.hide().append(dynamicItems).fadeIn(600);
             },
 
             storeUsername = function(){
@@ -74,17 +70,16 @@
               showTweets();
               isPosting = false;
             };
-
         showTweets();
         $container.on('click', 'a', showOthersTweets);
         $Tweets.on("click", 'button', function(){
           var $text = $(this).text();  
-          switch ($text){
+          switch ($text) {
             case "Show New Tweetles":
               showTweets();
               break;
             case "Post New Tweetle":
-              if (!isPosting){
+              if (!isPosting) {
                 typeof visitor === 'undefined' ? $Tweets.append('<div id = "userBox">Enter your name: <input class = "storeUser" type = "text"><button>Submit</button></div>')
                         : $Tweets
                             .append('<div id="userBox"><input class="postTweet" type="text"><button>Post Tweetle</button></div>');
@@ -93,9 +88,9 @@
               break;
             case "Submit":
               storeUsername();
-              if (visitor.length < 3 || visitor[0] === ' '){
+              if (visitor.length < 3 || visitor[0] === ' ') {
                 alert("You must enter a name with at least 3 characters");
-              }else{
+              } else {
                 $('#userBox').remove();
                 $Tweets.append('<div id="userBox"><input class="postTweet" type="text"><button>Post Tweetle</button></div>');
               }
