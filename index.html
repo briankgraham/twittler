@@ -34,7 +34,7 @@
                   amount = streams.home.length > 20 ? streams.home.length - 20 : 0;
 
               $container.text('');
-              $whosTweets.text('All the Tweetles');
+              $whosTweets.text('All the Tweetles:').hide().fadeIn(900);
               while(index >= amount){
                 tweet = streams.home[index];
                 dynamicItems += '<li class = "posts" data-user =' + tweet.user + '><a href = "#">' 
@@ -43,7 +43,7 @@
                             + '</em><br> ' + tweet.message + '</li>';
                 index -= 1;
               }
-              $container.hide().append(dynamicItems).fadeIn(600);
+              $container.hide().append(dynamicItems).fadeIn(900);
             },
 
             showOthersTweets = function(){
@@ -51,14 +51,14 @@
                   $tweets   = streams.users[$userName],
                   dynamicItems = "";
               $container.text('');
-              $whosTweets.text($userName + '\'s Tweetles');
+              $whosTweets.text($userName + '\'s Tweetles:').hide().fadeIn(900);
               $.each($tweets, function(index, value){
                 dynamicItems += '<li class = "posts" data-user =' + value.user + '></div>' 
                                 + '<a href = "#">' + '@' + value.user + '</a>' 
                                 + ': <em>' + value.created_at.toLocaleString() + '</em><br> '
                                 + value.message + '</li>';
               }); 
-              $container.hide().append(dynamicItems).fadeIn(600);
+              $container.hide().append(dynamicItems).fadeIn(900);
             },
 
             storeUsername = function(){
