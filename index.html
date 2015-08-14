@@ -7,8 +7,9 @@
   </head> 
   <body>   
       <div id = "select">
-        <div id = "logo">TWITTLER.</div>
         <div id = "Tweets">
+        <div id = "logo"><a href = '#'>TWITTLER.</a></div>
+        
         <button class = "one">Show New Tweetles</button>
         <button class = "two">Post New Tweetle</button>
         </div>
@@ -71,6 +72,7 @@
               isPosting = false;
             };
         showTweets();
+        $('#logo').on('click', 'a', showTweets);
         $container.on('click', 'a', showOthersTweets);
         $Tweets.on("click", 'button', function(){
           var $text = $(this).text();  
